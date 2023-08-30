@@ -8,52 +8,53 @@ class IntroPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color.fromARGB(255, 138, 60, 55),
-        body: Padding(
-          padding: const EdgeInsets.all(25.0),
-          child: SafeArea(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'SUSHI MAN',
-                  style: GoogleFonts.dmSerifDisplay(
-                    fontSize: 28,
-                    color: Colors.white,
-                  ),
+      backgroundColor: const Color.fromARGB(255, 138, 60, 55),
+      body: Padding(
+        padding: const EdgeInsets.all(25.0),
+        child: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'SUSHI MAN',
+                style: GoogleFonts.dmSerifDisplay(
+                  fontSize: 28,
+                  color: Colors.white,
                 ),
-                const SizedBox(height: 25),
-                Padding(
-                  padding: const EdgeInsets.all(50.0),
-                  child: Image.asset('lib/images/fish_eggs.png'),
+              ),
+              const SizedBox(height: 25),
+              Padding(
+                padding: const EdgeInsets.all(50.0),
+                child: Image.asset('lib/images/fish_eggs.png'),
+              ),
+              const SizedBox(height: 25),
+              Text(
+                'THE TASTE OF JAPANESE FOOD',
+                style: GoogleFonts.dmSerifDisplay(
+                  fontSize: 44,
+                  color: Colors.white,
                 ),
-                const SizedBox(height: 25),
-                Text(
-                  'THE TASTE OF JAPANESE FOOD',
-                  style: GoogleFonts.dmSerifDisplay(
-                    fontSize: 44,
-                    color: Colors.white,
-                  ),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                'Feel the taste of the most popular Japanese food from anywhere and anytime.',
+                style: TextStyle(
+                  height: 2,
+                  color: Colors.grey,
                 ),
-                const SizedBox(height: 10),
-                const Text(
-                  'Feel the taste of the most popular Japanese food from anywhere and anytime.',
-                  style: TextStyle(
-                    height: 2,
-                    color: Colors.grey,
-                  ),
-                ),
-                const SizedBox(height: 25),
-                MyButton(
-                  text: 'Get Started',
-                  onTap: () {
-                    // go to the menu page
-                  },
-                ),
-              ],
-            ),
+              ),
+              const SizedBox(height: 25),
+              MyButton(
+                text: 'Get Started',
+                onTap: () {
+                  // go to the menu page
+                },
+              ),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

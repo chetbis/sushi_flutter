@@ -4,8 +4,14 @@ import 'package:google_fonts/google_fonts.dart';
 class MyButton extends StatelessWidget {
   final String text;
   final void Function()? onTap;
+  final double fontSize;
 
-  const MyButton({super.key, required this.text, required this.onTap});
+  const MyButton({
+    super.key,
+    required this.text,
+    required this.onTap,
+    required this.fontSize,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +29,8 @@ class MyButton extends StatelessWidget {
             Text(
               text,
               style: GoogleFonts.dmSerifDisplay(
-                color: Colors.white,
+                  color: Colors.white,
+                  fontSize: fontSize
               ),
             ),
             const SizedBox(width: 10),

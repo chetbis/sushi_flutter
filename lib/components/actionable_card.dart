@@ -8,18 +8,20 @@ class ActionableCard extends StatelessWidget {
   final String title;
   final String actionBtnText;
   final String assetImagePath;
+  final double actionBtnFontSize;
 
   const ActionableCard({
     super.key,
     required this.title,
     required this.actionBtnText,
     required this.assetImagePath,
+    required this.actionBtnFontSize,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      
+
       padding: const EdgeInsets.all(20),
       margin: const EdgeInsets.symmetric(horizontal: 25),
       decoration: BoxDecoration(
@@ -42,6 +44,7 @@ class ActionableCard extends StatelessWidget {
                 height: 25,
               ),
               MyButton(
+                fontSize: actionBtnFontSize,
                 text: actionBtnText,
                 onTap: () {},
               ),

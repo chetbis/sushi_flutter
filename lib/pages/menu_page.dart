@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sushi/components/actionable_card.dart';
 
 import '../components/food_tile.dart';
+import '../components/popular_food.dart';
 import '../models/food.dart';
 
 class MenuPage extends StatelessWidget {
@@ -13,16 +13,16 @@ class MenuPage extends StatelessWidget {
     // Salmon sushi
     Food(
       name: 'Salmon Sushi',
-      price: '20',
+      price: '20.00',
       imagePath: 'lib/images/multi_fish_eggs.png',
       rating: '4.9',
     ),
     // tuna
     Food(
       name: 'Tuna',
-      price: '40',
+      price: '40.00',
       imagePath: 'lib/images/pink_sushi.png',
-      rating: '5',
+      rating: '5.0',
     ),
   ];
 
@@ -39,80 +39,96 @@ class MenuPage extends StatelessWidget {
           'Tokyo',
           style: GoogleFonts.dmSerifDisplay(
             color: Colors.grey[900],
+            fontSize: 25,
           ),
         ),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const ActionableCard(
-              title: 'Get 32% Promo',
-              actionBtnText: 'Redeem',
-              assetImagePath: 'lib/images/multi_sushi.png',
-            ),
-            const SizedBox(height: 40),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25),
-              child: TextField(
-                style: GoogleFonts.dmSerifDisplay(
-                  fontSize: 20,
-                ),
-                decoration: InputDecoration(
-                  hintText: 'Search here...',
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.white),
-                    borderRadius: BorderRadius.circular(20),
+        child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const ActionableCard(
+                actionBtnFontSize: 20,
+                title: 'Get 32% Promo',
+                actionBtnText: 'Redeem',
+                assetImagePath: 'lib/images/multi_sushi.png',
+              ),
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: TextField(
+                  style: GoogleFonts.dmSerifDisplay(
+                    fontSize: 20,
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.white),
-                    borderRadius: BorderRadius.circular(20),
+                  decoration: InputDecoration(
+                    hintText: 'Search here...',
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 20,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: 40),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25),
-              child: Text(
-                'Food Menu',
-                style: GoogleFonts.dmSerifDisplay(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: Colors.grey[800],
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: Text(
+                  'Food Menu',
+                  style: GoogleFonts.dmSerifDisplay(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: Colors.grey[800],
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 40),
-            SizedBox(
-              height: 250,
-              child: ListView.separated(
-                physics: const BouncingScrollPhysics(),
-                separatorBuilder: (BuildContext context, int index) {
-                  return const SizedBox(width: 30);
-                },
-                scrollDirection: Axis.horizontal,
-                itemCount: _food.length + 2,
-                // 2 for starting and ending space,
-                itemBuilder: (BuildContext context, int index) {
+              const SizedBox(height: 20),
+              SizedBox(
+                height: 250,
+                child: ListView.separated(
+                  padding: const EdgeInsets.only(
+                    left: 25,
+                    right: 25,
+                  ),
+                  physics: const BouncingScrollPhysics(),
+                  separatorBuilder: (BuildContext context, int index) {
+                    return const SizedBox(width: 30);
+                  },
+                  scrollDirection: Axis.horizontal,
+                  itemCount: _food.length,
+                  // 2 for starting and ending space,
+                  itemBuilder: (BuildContext context, int index) {
+                    Food foodItem = _food[index];
 
-                  if (index == 0 || index == (_food.length + 1)) {
-                    return const SizedBox(width: 10);
-                  }
-
-                  Food foodItem = _food[index - 1];
-
-                  return FoodTile(
-                    imagePath: foodItem.imagePath,
-                    name: foodItem.name,
-                    price: foodItem.price,
-                    rating: foodItem.rating
-                  );
-                },
+                    return FoodTile(
+                      imagePath: foodItem.imagePath,
+                      name: foodItem.name,
+                      price: foodItem.price,
+                      rating: foodItem.rating,
+                    );
+                  },
+                ),
               ),
-            ),
-            const SizedBox(height: 40)
-          ],
+              const SizedBox(height: 30),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25),
+                child: PopularFood(
+                  price: '\$21.00',
+                  imagePath: 'lib/images/fish_eggs.png',
+                  foodName: 'Salmon Eggs',
+                ),
+              ),
+              const SizedBox(height: 40),
+            ],
+          ),
         ),
       ),
     );

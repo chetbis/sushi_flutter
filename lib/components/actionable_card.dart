@@ -19,6 +19,7 @@ class ActionableCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      
       padding: const EdgeInsets.all(20),
       margin: const EdgeInsets.symmetric(horizontal: 25),
       decoration: BoxDecoration(

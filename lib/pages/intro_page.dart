@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sushi/components/button.dart';
 
+import '../theme/colors.dart';
+
 class IntroPage extends StatelessWidget {
   const IntroPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 138, 60, 55),
+      backgroundColor: primaryColor,
       body: Padding(
         padding: const EdgeInsets.all(25.0),
         child: SafeArea(
@@ -49,6 +51,7 @@ class IntroPage extends StatelessWidget {
                 text: 'Get Started',
                 onTap: () {
                   // go to the menu page
+                  Navigator.pushNamed(context, '/menu-page');
                 },
               ),
             ],

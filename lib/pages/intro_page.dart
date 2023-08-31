@@ -39,9 +39,9 @@ class IntroPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
-              const Text(
+              Text(
                 'Feel the taste of the most popular Japanese food from anywhere and anytime.',
-                style: TextStyle(
+                style: GoogleFonts.dmSerifDisplay(
                   height: 2,
                   color: Colors.grey,
                 ),

@@ -104,7 +104,6 @@ class MenuPage extends StatelessWidget {
                   },
                   scrollDirection: Axis.horizontal,
                   itemCount: _food.length,
-                  // 2 for starting and ending space,
                   itemBuilder: (BuildContext context, int index) {
                     Food foodItem = _food[index];
 

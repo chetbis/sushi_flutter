@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sushi/components/actionable_card.dart';
-import 'package:sushi/constants.dart';
 import 'package:sushi/components/food_search_input.dart';
+import 'package:sushi/pages/food_details_page.dart';
 
 import '../components/food_tile.dart';
 import '../components/popular_food.dart';
@@ -11,22 +11,38 @@ import '../models/food.dart';
 class MenuPage extends StatelessWidget {
   const MenuPage({super.key});
 
+  final Food _popularFood = const Food(
+    name: 'Salmon Eggs',
+    price: '21.00',
+    imagePath: 'lib/images/fish_eggs.png',
+    rating: '4.9',
+  );
+
   final List<Food> _food = const [
     // Salmon sushi
     Food(
       name: 'Salmon Sushi',
       price: '20.00',
-      imagePath: 'lib/images/multi_fish_eggs.png',
+      imagePath: 'lib/images/pink_sushi.png',
       rating: '4.9',
     ),
     // tuna
     Food(
       name: 'Tuna',
       price: '40.00',
-      imagePath: 'lib/images/pink_sushi.png',
       rating: '5.0',
+      imagePath: 'lib/images/multi_fish_eggs.png',
     ),
   ];
+
+  _onFoodTileTapped(BuildContext context, Food food) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => FoodDetailsPage(foodItem: food),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,22 +109,25 @@ class MenuPage extends StatelessWidget {
                       price: foodItem.price,
                       rating: foodItem.rating,
                       onTapped: () {
-                        Navigator.pushNamed(
-                          context,
-                          Routes.foodDetailsPage,
-                        );
+                        _onFoodTileTapped(context, foodItem);
                       },
                     );
                   },
                 ),
               ),
               const SizedBox(height: 30),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: PopularFood(
-                  price: '\$21.00',
-                  imagePath: 'lib/images/fish_eggs.png',
-                  foodName: 'Salmon Eggs',
+                  price: _popularFood.price,
+                  imagePath: _popularFood.imagePath,
+                  foodName: _popularFood.name,
+                  onTap: () {
+                    _onFoodTileTapped(
+                      context,
+                      _popularFood,
+                    );
+                  },
                 ),
               ),
               const SizedBox(height: 40),

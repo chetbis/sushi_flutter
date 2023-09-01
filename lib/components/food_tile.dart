@@ -35,7 +35,10 @@ class FoodTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Image.asset(imagePath, height: 140),
+            Hero(
+              tag: imagePath,
+              child: Image.asset(imagePath, height: 140),
+            ),
             Text(
               name,
               style: GoogleFonts.dmSerifDisplay(fontSize: 20),

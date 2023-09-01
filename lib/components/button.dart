@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sushi/theme/colors.dart';
 
 class MyButton extends StatelessWidget {
   final String text;
@@ -9,18 +10,20 @@ class MyButton extends StatelessWidget {
   const MyButton({
     super.key,
     required this.text,
-    required this.onTap,
+    this.onTap,
     required this.fontSize,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        onTap?.call();
+      },
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: const Color.fromARGB(212, 135, 81, 77),
+          color: secondaryColor,
           borderRadius: BorderRadius.circular(40),
         ),
         child: Row(

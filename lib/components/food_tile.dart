@@ -6,7 +6,7 @@ class FoodTile extends StatelessWidget {
   final String name;
   final String price;
   final String rating;
-  final Function? onTapped;
+  final void Function()? onTapped;
 
   const FoodTile({
     super.key,
@@ -21,9 +21,7 @@ class FoodTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (onTapped != null) {
-          onTapped!();
-        }
+        onTapped?.call();
       },
       child: Container(
         padding: const EdgeInsets.all(20),

@@ -1,14 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sushi/components/button.dart';
+import 'package:sushi/components/circular_icon_btn.dart';
 import 'package:sushi/models/food.dart';
+import 'package:sushi/theme/colors.dart';
 
-class FoodDetailsPage extends StatelessWidget {
+class FoodDetailsPage extends StatefulWidget {
   final Food foodItem;
 
   const FoodDetailsPage({
     super.key,
     required this.foodItem,
   });
+
+  @override
+  State<FoodDetailsPage> createState() => _FoodDetailsPageState();
+}
+
+class _FoodDetailsPageState extends State<FoodDetailsPage> {
+  int _itemQuantity = 0;
+  final _maxQuantity = 10;
+
+  _incrementQuantity() {
+    if (_itemQuantity >= _maxQuantity) return;
+    setState(() => ++_itemQuantity);
+  }
+
+  _decrementQuantity() {
+    if (_itemQuantity == 0) return;
+    setState(() => --_itemQuantity);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +44,14 @@ class FoodDetailsPage extends StatelessWidget {
           children: [
             Expanded(
               child: ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 30,
+                ),
                 children: [
                   Hero(
-                    tag: foodItem.imagePath,
+                    tag: widget.foodItem.imagePath,
                     child: Image.asset(
-                      foodItem.imagePath,
+                      widget.foodItem.imagePath,
                       height: 250,
                     ),
                   ),
@@ -39,7 +62,7 @@ class FoodDetailsPage extends StatelessWidget {
                         color: Colors.yellow[800],
                       ),
                       Text(
-                        foodItem.rating,
+                        widget.foodItem.rating,
                         style: GoogleFonts.dmSerifDisplay(
                           color: Colors.grey[700],
                         ),
@@ -50,7 +73,7 @@ class FoodDetailsPage extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    foodItem.name,
+                    widget.foodItem.name,
                     style: GoogleFonts.dmSerifDisplay(
                       fontWeight: FontWeight.bold,
                       fontSize: 25,
@@ -72,9 +95,70 @@ class FoodDetailsPage extends StatelessWidget {
                       color: Colors.grey[700],
                     ),
                   ),
+                  const SizedBox(height: 20),
                 ],
               ),
-            )
+            ),
+            Container(
+              decoration: const BoxDecoration(
+                color: primaryColor,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 20,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '\$${widget.foodItem.price}',
+                          style: GoogleFonts.dmSerifDisplay(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            CircularIconButton(
+                              icon: Icons.remove,
+                              onPressed: _decrementQuantity,
+                            ),
+                            SizedBox(
+                              width: 40,
+                              child: Center(
+                                child: Text(
+                                  '$_itemQuantity',
+                                  style: GoogleFonts.dmSerifDisplay(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            CircularIconButton(
+                              icon: Icons.add,
+                              onPressed: _incrementQuantity,
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    MyButton(
+                      text: 'Add To Cart',
+                      onTap: () {
+                        print('add to cart tapped');
+                      },
+                      fontSize: 19,
+                    )
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),

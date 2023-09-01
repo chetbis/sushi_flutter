@@ -5,7 +5,7 @@ class PopularFood extends StatelessWidget {
   final String imagePath;
   final String foodName;
   final String price;
-  final Function? onTap;
+  final void Function()? onTap;
 
   const PopularFood({
     super.key,
@@ -19,9 +19,7 @@ class PopularFood extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (onTap != null) {
-          onTap!();
-        }
+        onTap?.call();
       },
       child: Container(
         padding: const EdgeInsets.all(20),

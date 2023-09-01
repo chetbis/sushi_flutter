@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sushi/components/button.dart';
 import 'package:sushi/constants.dart';
@@ -17,7 +18,6 @@ class IntroPage extends StatelessWidget {
           padding: const EdgeInsets.all(25.0),
           child: SafeArea(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
@@ -27,12 +27,12 @@ class IntroPage extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                const SizedBox(height: 25),
+                const SizedBox(height: 15),
                 Padding(
                   padding: const EdgeInsets.all(50.0),
                   child: Image.asset('lib/images/fish_eggs.png'),
                 ),
-                const SizedBox(height: 25),
+                const SizedBox(height: 10),
                 Text(
                   'THE TASTE OF JAPANESE FOOD',
                   style: GoogleFonts.dmSerifDisplay(

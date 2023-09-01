@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sushi/components/constants.dart';
+import 'package:sushi/constants.dart';
 import 'package:sushi/pages/food_details_page.dart';
 import 'package:sushi/pages/intro_page.dart';
 import 'package:sushi/pages/menu_page.dart';

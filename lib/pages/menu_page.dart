@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sushi/components/actionable_card.dart';
-import 'package:sushi/components/constants.dart';
+import 'package:sushi/constants.dart';
 import 'package:sushi/components/food_search_input.dart';
 
 import '../components/food_tile.dart';

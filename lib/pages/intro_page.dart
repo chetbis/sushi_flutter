@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sushi/components/button.dart';
+import 'package:sushi/components/constants.dart';
 
 import '../theme/colors.dart';
 
@@ -52,8 +53,10 @@ class IntroPage extends StatelessWidget {
                   fontSize: 20,
                   text: 'Get Started',
                   onTap: () {
-                    // go to the menu page
-                    Navigator.pushNamed(context, '/menu-page');
+                    Navigator.pushNamed(
+                      context,
+                      Routes.menuPage,
+                    );
                   },
                 ),
               ],

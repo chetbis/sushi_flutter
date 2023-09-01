@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sushi/components/actionable_card.dart';
+import 'package:sushi/components/constants.dart';
+import 'package:sushi/components/food_search_input.dart';
 
 import '../components/food_tile.dart';
 import '../components/popular_food.dart';
@@ -55,28 +57,9 @@ class MenuPage extends StatelessWidget {
                 assetImagePath: 'lib/images/multi_sushi.png',
               ),
               const SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: TextField(
-                  style: GoogleFonts.dmSerifDisplay(
-                    fontSize: 20,
-                  ),
-                  decoration: InputDecoration(
-                    hintText: 'Search here...',
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 20,
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.white),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.white),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25),
+                child: FoodSearchInput(),
               ),
               const SizedBox(height: 20),
               Padding(
@@ -98,21 +81,23 @@ class MenuPage extends StatelessWidget {
                     left: 25,
                     right: 25,
                   ),
-                  physics: const BouncingScrollPhysics(),
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const SizedBox(width: 30);
-                  },
+                  separatorBuilder: (BuildContext context, int index) =>
+                      const SizedBox(width: 30),
                   scrollDirection: Axis.horizontal,
                   itemCount: _food.length,
-                  // 2 for starting and ending space,
                   itemBuilder: (BuildContext context, int index) {
                     Food foodItem = _food[index];
-
                     return FoodTile(
                       imagePath: foodItem.imagePath,
                       name: foodItem.name,
                       price: foodItem.price,
                       rating: foodItem.rating,
+                      onTapped: () {
+                        Navigator.pushNamed(
+                          context,
+                          Routes.foodDetailsPage,
+                        );
+                      },
                     );
                   },
                 ),

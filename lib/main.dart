@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sushi/components/constants.dart';
+import 'package:sushi/pages/food_details_page.dart';
 import 'package:sushi/pages/intro_page.dart';
 import 'package:sushi/pages/menu_page.dart';
 
@@ -9,15 +11,15 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Tokyo Sushi',
       home: const IntroPage(),
       routes: {
-        '/intro-page': (context) => const IntroPage(),
-        '/menu-page': (context) => const MenuPage(),
+        Routes.introPage: (context) => const IntroPage(),
+        Routes.menuPage: (context) => const MenuPage(),
+        Routes.foodDetailsPage: (context) => const FoodDetailsPage(),
       },
     );
   }

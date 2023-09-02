@@ -58,7 +58,9 @@ class FoodTile extends StatelessWidget {
                       ),
                       Text(
                         rating,
-                        style: GoogleFonts.dmSerifDisplay(),
+                        style: GoogleFonts.dmSerifDisplay(
+                          color: Colors.grey[500],
+                        ),
                       )
                     ],
                   ),

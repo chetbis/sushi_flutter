@@ -45,7 +45,7 @@ class PopularFood extends StatelessWidget {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  price,
+                  '\$$price',
                   style: GoogleFonts.dmSerifDisplay(color: Colors.grey[700]),
                 ),
               ],

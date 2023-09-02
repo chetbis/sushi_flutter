@@ -11,8 +11,9 @@ class IntroPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: primaryColor,
-        body: LayoutBuilder(builder: (context, constraints) {
+      backgroundColor: primaryColor,
+      body: LayoutBuilder(
+        builder: (context, constraints) {
           return SingleChildScrollView(
             child: ConstrainedBox(
               constraints: constraints.copyWith(
@@ -71,6 +72,8 @@ class IntroPage extends StatelessWidget {
               ),
             ),
           );
-        }));
+        },
+      ),
+    );
   }
 }

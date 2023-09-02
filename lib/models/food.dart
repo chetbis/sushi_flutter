@@ -15,5 +15,4 @@ class Food {
     required this.imagePath,
     required this.rating,
   });
-
 }

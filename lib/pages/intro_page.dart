@@ -22,53 +22,54 @@ class IntroPage extends StatelessWidget {
               ),
               child: SafeArea(
                 child: Padding(
-                    padding: const EdgeInsets.all(25.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Text(
-                          'SUSHI MAN',
-                          style: GoogleFonts.dmSerifDisplay(
-                            fontSize: 28,
-                            color: Colors.white,
-                          ),
+                  padding: const EdgeInsets.all(25.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        'SUSHI MAN',
+                        style: GoogleFonts.dmSerifDisplay(
+                          fontSize: 28,
+                          color: Colors.white,
                         ),
-                        const SizedBox(height: 15),
-                        Padding(
-                          padding: const EdgeInsets.all(50.0),
-                          child: Image.asset('lib/images/fish_eggs.png'),
+                      ),
+                      const SizedBox(height: 15),
+                      Padding(
+                        padding: const EdgeInsets.all(50.0),
+                        child: Image.asset('lib/images/fish_eggs.png'),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        'THE TASTE OF JAPANESE FOOD',
+                        style: GoogleFonts.dmSerifDisplay(
+                          fontSize: 44,
+                          color: Colors.white,
                         ),
-                        const SizedBox(height: 10),
-                        Text(
-                          'THE TASTE OF JAPANESE FOOD',
-                          style: GoogleFonts.dmSerifDisplay(
-                            fontSize: 44,
-                            color: Colors.white,
-                          ),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        'Feel the taste of the most popular Japanese food from anywhere and anytime.',
+                        style: TextStyle(
+                          height: 2,
+                          letterSpacing: 1,
+                          color: Colors.grey[300],
                         ),
-                        const SizedBox(height: 10),
-                        Text(
-                          'Feel the taste of the most popular Japanese food from anywhere and anytime.',
-                          style: TextStyle(
-                            height: 2,
-                            letterSpacing: 1,
-                            color: Colors.grey[300],
-                          ),
-                        ),
-                        const SizedBox(height: 25),
-                        MyButton(
-                          fontSize: 20,
-                          text: 'Get Started',
-                          onTap: () {
-                            Navigator.pushNamed(
-                              context,
-                              Routes.menuPage,
-                            );
-                          },
-                        ),
-                      ],
-                    )),
+                      ),
+                      const SizedBox(height: 25),
+                      MyButton(
+                        fontSize: 20,
+                        text: 'Get Started',
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            Routes.menuPage,
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
           );

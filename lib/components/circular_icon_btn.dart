@@ -9,17 +9,24 @@ class CircularIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: secondaryColor,
-        shape: BoxShape.circle,
-      ),
-      child: IconButton(
-        color: Colors.white,
-        onPressed: () {
-          onPressed?.call();
-        },
-        icon: Icon(icon),
+    return Material(
+      color: Colors.transparent,
+      shape: const CircleBorder(),
+      clipBehavior: Clip.hardEdge,
+      child: InkWell(
+        child: Container(
+          decoration: const BoxDecoration(
+            color: secondaryColor,
+            shape: BoxShape.circle,
+          ),
+          child: IconButton(
+            color: Colors.white,
+            onPressed: () {
+              onPressed?.call();
+            },
+            icon: Icon(icon),
+          ),
+        ),
       ),
     );
   }

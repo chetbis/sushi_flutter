@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sushi/constants.dart';
 import 'package:sushi/models/shop.dart';
+import 'package:sushi/pages/cart_page.dart';
 import 'package:sushi/pages/intro_page.dart';
 import 'package:sushi/pages/menu_page.dart';
 
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
       home: const IntroPage(),
       routes: {
         Routes.introPage: (context) => const IntroPage(),
-        Routes.menuPage: (context) => MenuPage()
+        Routes.menuPage: (context) => MenuPage(),
+        Routes.cartPage: (context) => const CartPage(),
       },
     );
   }

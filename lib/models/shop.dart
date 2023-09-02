@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'food.dart';
 
 class Shop with ChangeNotifier {
-
   final Map<String, Food> _foodItemsEntities = {
     'food_1': Food(
       id: 'food_1',
@@ -61,9 +60,11 @@ class Shop with ChangeNotifier {
   }
 
   /// add items to the shopping cart
-  addToCart(String itemId) {
+  addToCart(String itemId, int quantity) {
     if (!_foodItemExists(itemId)) return;
-    _cartItems.add(itemId);
+    for (int i = 0; i < quantity; i++) {
+      _cartItems.add(itemId);
+    }
     notifyListeners();
   }
 

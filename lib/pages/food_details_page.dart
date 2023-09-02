@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:sushi/components/button.dart';
-import 'package:sushi/components/circular_icon_btn.dart';
+import 'package:provider/provider.dart';
 import 'package:sushi/models/food.dart';
+import 'package:sushi/models/shop.dart';
 import 'package:sushi/theme/colors.dart';
+import 'package:sushi/components/button.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:sushi/components/circular_icon_btn.dart';
 
 class FoodDetailsPage extends StatefulWidget {
   final Food foodItem;
@@ -21,14 +23,53 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
   int _itemQuantity = 0;
   final _maxQuantity = 10;
 
-  _incrementQuantity() {
+  void _incrementQuantity() {
     if (_itemQuantity >= _maxQuantity) return;
     setState(() => ++_itemQuantity);
   }
 
-  _decrementQuantity() {
+  void _decrementQuantity() {
     if (_itemQuantity == 0) return;
     setState(() => --_itemQuantity);
+  }
+
+  void _addToCart(String itemId) {
+    final shop = context.read<Shop>();
+    shop.addToCart(itemId, _itemQuantity);
+  }
+
+  void _showAddedToCartDialog(BuildContext context) {
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          contentTextStyle: const TextStyle(
+            color: Colors.white,
+          ),
+          backgroundColor: primaryColor,
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Icons.done,
+                color: Colors.white,
+                size: 30,
+              ),
+            )
+          ],
+          content: Text(
+            '${widget.foodItem.name} added to cart',
+            style: GoogleFonts.dmSerifDisplay(
+              fontSize: 20,
+            ),
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -151,7 +192,10 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                     MyButton(
                       text: 'Add To Cart',
                       onTap: () {
-                        print('add to cart tapped');
+                        if (_itemQuantity == 0) return;
+
+                        _addToCart(widget.foodItem.id);
+                        _showAddedToCartDialog(context);
                       },
                       fontSize: 19,
                     )

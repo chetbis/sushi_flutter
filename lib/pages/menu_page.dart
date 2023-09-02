@@ -14,6 +14,7 @@ class MenuPage extends StatelessWidget {
   final Food _popularFood = const Food(
     name: 'Salmon Eggs',
     price: '21.00',
+    id: 'food_3',
     imagePath: 'lib/images/fish_eggs.png',
     rating: '4.9',
   );
@@ -21,6 +22,7 @@ class MenuPage extends StatelessWidget {
   final List<Food> _food = const [
     // Salmon sushi
     Food(
+      id: 'food_1',
       name: 'Salmon Sushi',
       price: '20.00',
       imagePath: 'lib/images/pink_sushi.png',
@@ -28,6 +30,7 @@ class MenuPage extends StatelessWidget {
     ),
     // tuna
     Food(
+      id: 'food_2',
       name: 'Tuna',
       price: '40.00',
       rating: '5.0',

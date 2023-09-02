@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:sushi/components/actionable_card.dart';
 import 'package:sushi/components/food_search_input.dart';
+import 'package:sushi/models/shop.dart';
 import 'package:sushi/pages/food_details_page.dart';
 
 import '../components/food_tile.dart';
@@ -9,34 +11,15 @@ import '../components/popular_food.dart';
 import '../models/food.dart';
 
 class MenuPage extends StatelessWidget {
-  const MenuPage({super.key});
+  MenuPage({super.key});
 
-  final Food _popularFood = const Food(
+  final Food _popularFood = Food(
     name: 'Salmon Eggs',
     price: '21.00',
     id: 'food_3',
     imagePath: 'lib/images/fish_eggs.png',
     rating: '4.9',
   );
-
-  final List<Food> _food = const [
-    // Salmon sushi
-    Food(
-      id: 'food_1',
-      name: 'Salmon Sushi',
-      price: '20.00',
-      imagePath: 'lib/images/pink_sushi.png',
-      rating: '4.9',
-    ),
-    // tuna
-    Food(
-      id: 'food_2',
-      name: 'Tuna',
-      price: '40.00',
-      rating: '5.0',
-      imagePath: 'lib/images/multi_fish_eggs.png',
-    ),
-  ];
 
   _onFoodTileTapped(BuildContext context, Food food) {
     Navigator.push(
@@ -49,6 +32,8 @@ class MenuPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final shopModel = context.read<Shop>();
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.grey[300],
@@ -101,10 +86,11 @@ class MenuPage extends StatelessWidget {
                 separatorBuilder: (BuildContext context, int index) =>
                     const SizedBox(width: 30),
                 scrollDirection: Axis.horizontal,
-                itemCount: _food.length,
+                itemCount: shopModel.foodItems.length,
                 itemBuilder: (BuildContext context, int index) {
-                  Food foodItem = _food[index];
+                  Food foodItem = shopModel.foodItems[index];
                   return FoodTile(
+                    tag: foodItem.tag,
                     imagePath: foodItem.imagePath,
                     name: foodItem.name,
                     price: foodItem.price,
@@ -120,6 +106,7 @@ class MenuPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: PopularFood(
+                tag: _popularFood.tag,
                 price: _popularFood.price,
                 imagePath: _popularFood.imagePath,
                 foodName: _popularFood.name,

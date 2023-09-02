@@ -6,6 +6,7 @@ class FoodTile extends StatelessWidget {
   final String name;
   final String price;
   final String rating;
+  final UniqueKey tag;
   final void Function()? onTapped;
 
   const FoodTile({
@@ -14,6 +15,7 @@ class FoodTile extends StatelessWidget {
     required this.name,
     required this.price,
     required this.rating,
+    required this.tag,
     this.onTapped,
   });
 
@@ -34,7 +36,7 @@ class FoodTile extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Hero(
-              tag: imagePath,
+              tag: tag,
               child: Image.asset(imagePath, height: 140),
             ),
             Text(

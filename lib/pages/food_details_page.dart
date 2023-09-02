@@ -49,7 +49,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                 ),
                 children: [
                   Hero(
-                    tag: widget.foodItem.imagePath,
+                    tag: widget.foodItem.tag,
                     child: Image.asset(
                       widget.foodItem.imagePath,
                       height: 250,

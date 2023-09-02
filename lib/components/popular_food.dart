@@ -5,6 +5,7 @@ class PopularFood extends StatelessWidget {
   final String imagePath;
   final String foodName;
   final String price;
+  final UniqueKey tag;
   final void Function()? onTap;
 
   const PopularFood({
@@ -12,6 +13,7 @@ class PopularFood extends StatelessWidget {
     required this.imagePath,
     required this.foodName,
     required this.price,
+    required this.tag,
     this.onTap,
   });
 
@@ -30,7 +32,7 @@ class PopularFood extends StatelessWidget {
         child: Row(
           children: [
             Hero(
-              tag: imagePath,
+              tag: tag,
               child: Image.asset(imagePath, height: 100),
             ),
             const SizedBox(width: 10),

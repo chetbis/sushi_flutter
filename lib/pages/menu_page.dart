@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:sushi/components/actionable_card.dart';
 import 'package:sushi/components/food_search_input.dart';
+import 'package:sushi/constants.dart';
 import 'package:sushi/models/shop.dart';
 import 'package:sushi/pages/food_details_page.dart';
 
@@ -39,6 +40,20 @@ class MenuPage extends StatelessWidget {
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
         elevation: 0,
+        actions: [
+          IconButton(
+            color: Colors.grey[900],
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                Routes.cartPage,
+              );
+            },
+            icon: const Icon(
+              Icons.shopping_cart,
+            ),
+          )
+        ],
         backgroundColor: Colors.transparent,
         leading: Icon(Icons.menu, color: Colors.grey[900]),
         title: Text(
@@ -52,6 +67,7 @@ class MenuPage extends StatelessWidget {
       body: SafeArea(
         child: ListView(
           children: [
+            const SizedBox(height: 20),
             const ActionableCard(
               actionBtnFontSize: 20,
               title: 'Get 32% Promo',

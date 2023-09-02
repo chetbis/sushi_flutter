@@ -69,9 +69,8 @@ class Shop with ChangeNotifier {
   }
 
   /// removes an item from the shopping cart
-  removeFromCart(String itemId) {
-    if (!_foodItemExists(itemId)) return;
-    _cartItems = _cartItems.where((element) => element != itemId).toList();
+  removeFromCart(int itemIndex) {
+    _cartItems.removeAt(itemIndex);
     notifyListeners();
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sushi/components/button.dart';
+import 'package:sushi/components/quantity_counter.dart';
 import 'package:sushi/models/shop.dart';
 import 'package:sushi/theme/colors.dart';
 
@@ -30,10 +31,16 @@ class CartPage extends StatelessWidget {
                       final foodItem = shopModel.cartItems[index];
                       return Container(
                         decoration: BoxDecoration(
-                          color: secondaryColor,
+                          color: secondaryColor.withOpacity(.4),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: ListTile(
+                          contentPadding: const EdgeInsets.only(
+                            left: 20,
+                            top: 20,
+                            bottom: 20,
+                            right: 0,
+                          ),
                           title: Text(
                             foodItem.name,
                             style: TextStyle(
@@ -42,19 +49,37 @@ class CartPage extends StatelessWidget {
                               fontSize: 25,
                             ),
                           ),
-                          trailing: IconButton(
-                            onPressed: () {
-                              shopModel.removeFromCart(index);
-                            },
-                            icon: Icon(
-                              Icons.delete,
-                              color: Colors.grey[200],
+                          trailing: SizedBox(
+                            width: 150,
+                            child: QuantityCounter(
+                              itemQuantity: shopModel.getAddedQuantity(
+                                foodItem.id,
+                              ),
+                              onValueChanged: (currentCount) {
+                                if (currentCount == 0) {
+                                  shopModel.removeItem(foodItem.id);
+                                  // remove item from the cart
+                                } else {
+                                  shopModel.setItemQuantity(
+                                    foodItem.id,
+                                    currentCount,
+                                  );
+                                }
+                              },
                             ),
                           ),
-                          subtitle: Text(
-                            '\$${foodItem.price}',
-                            style: TextStyle(
-                              color: Colors.grey[200],
+                          subtitle: Padding(
+                            padding: const EdgeInsets.only(
+                              top: 20,
+                            ),
+                            child: Text(
+                              '\$${_getTotalPrice(
+                                shopModel.getAddedQuantity(foodItem.id),
+                                double.tryParse(foodItem.price) ?? 0,
+                              )}',
+                              style: TextStyle(
+                                color: Colors.grey[200],
+                              ),
                             ),
                           ),
                         ),
@@ -79,5 +104,9 @@ class CartPage extends StatelessWidget {
         );
       },
     );
+  }
+
+  double _getTotalPrice(int quantity, double unitPrice) {
+    return quantity * unitPrice;
   }
 }

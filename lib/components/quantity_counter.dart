@@ -4,11 +4,15 @@ import 'circular_icon_btn.dart';
 class QuantityCounter extends StatefulWidget {
   int itemQuantity;
   final void Function(int)? onValueChanged;
+  final void Function(int)? onIncrement;
+  final void Function(int)? onDecrement;
 
   QuantityCounter({
     super.key,
     this.itemQuantity = 0,
     this.onValueChanged,
+    this.onDecrement,
+    this.onIncrement,
   });
 
   @override
@@ -25,7 +29,9 @@ class _QuantityCounterState extends State<QuantityCounter> {
           onPressed: () {
             if (widget.itemQuantity == 0) return;
             setState(() => widget.itemQuantity--);
+
             widget.onValueChanged?.call(widget.itemQuantity);
+            widget.onDecrement?.call(widget.itemQuantity);
           },
         ),
         SizedBox(
@@ -44,7 +50,9 @@ class _QuantityCounterState extends State<QuantityCounter> {
           icon: Icons.add,
           onPressed: () {
             setState(() => widget.itemQuantity++);
+
             widget.onValueChanged?.call(widget.itemQuantity);
+            widget.onIncrement?.call(widget.itemQuantity);
           },
         ),
       ],

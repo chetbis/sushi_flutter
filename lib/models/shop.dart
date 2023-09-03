@@ -62,6 +62,11 @@ class Shop with ChangeNotifier {
     return _foodItemsEntities.containsKey(itemId);
   }
 
+  /// get added quantity
+  int getAddedQuantity(String itemId) {
+    return _cartItems[itemId] ?? 0;
+  }
+
   /// add items to the shopping cart
   addToCart(String itemId, int quantity) {
     if (!_foodItemExists(itemId)) return;
@@ -69,8 +74,16 @@ class Shop with ChangeNotifier {
     notifyListeners();
   }
 
-  /// removes an item from the shopping cart
-  removeFromCart(int itemIndex) {
-    /// TODO - implement this method
+  /// sets item quantity
+  setItemQuantity(String itemId, int quantity) {
+    if (!_foodItemExists(itemId)) return;
+    _cartItems[itemId] = quantity;
+    notifyListeners();
+  }
+
+  /// remove item from cart
+  removeItem(String itemId) {
+    _cartItems.remove(itemId);
+    notifyListeners();
   }
 }

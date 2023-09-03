@@ -115,8 +115,9 @@ class CartPage extends StatelessWidget {
       0.0,
       (previousValue, element) {
         double totalItemPrice = _getTotalItemPrice(
-            shopModel.getAddedQuantity(element.id),
-            double.tryParse(element.price) ?? 0);
+          shopModel.getAddedQuantity(element.id),
+          double.tryParse(element.price) ?? 0,
+        );
 
         return previousValue + totalItemPrice;
       },

@@ -73,7 +73,7 @@ class CartPage extends StatelessWidget {
                               top: 20,
                             ),
                             child: Text(
-                              '\$${_getTotalPrice(
+                              '\$${_getTotalItemPrice(
                                 shopModel.getAddedQuantity(foodItem.id),
                                 double.tryParse(foodItem.price) ?? 0,
                               )}',
@@ -91,10 +91,10 @@ class CartPage extends StatelessWidget {
                     itemCount: shopModel.cartItems.length,
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.all(20),
+                Padding(
+                  padding: const EdgeInsets.all(20),
                   child: MyButton(
-                    text: 'Pay now!',
+                    text: 'Pay now | \$${_getCartTotalPrice(shopModel)}',
                     fontSize: 20,
                   ),
                 )
@@ -106,7 +106,20 @@ class CartPage extends StatelessWidget {
     );
   }
 
-  double _getTotalPrice(int quantity, double unitPrice) {
+  double _getTotalItemPrice(int quantity, double unitPrice) {
     return quantity * unitPrice;
+  }
+
+  double _getCartTotalPrice(Shop shopModel) {
+    return shopModel.cartItems.fold(
+      0.0,
+      (previousValue, element) {
+        double totalItemPrice = _getTotalItemPrice(
+            shopModel.getAddedQuantity(element.id),
+            double.tryParse(element.price) ?? 0);
+
+        return previousValue + totalItemPrice;
+      },
+    );
   }
 }

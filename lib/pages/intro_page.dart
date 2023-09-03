@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:sushi/components/button.dart';
 import 'package:sushi/constants.dart';
 
@@ -27,9 +26,9 @@ class IntroPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Text(
+                      const Text(
                         'SUSHI MAN',
-                        style: GoogleFonts.dmSerifDisplay(
+                        style: TextStyle(
                           fontSize: 28,
                           color: Colors.white,
                         ),
@@ -40,9 +39,9 @@ class IntroPage extends StatelessWidget {
                         child: Image.asset('lib/images/fish_eggs.png'),
                       ),
                       const SizedBox(height: 10),
-                      Text(
+                      const Text(
                         'THE TASTE OF JAPANESE FOOD',
-                        style: GoogleFonts.dmSerifDisplay(
+                        style: TextStyle(
                           fontSize: 44,
                           color: Colors.white,
                         ),

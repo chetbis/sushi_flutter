@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:sushi/components/actionable_card.dart';
 import 'package:sushi/components/food_search_input.dart';
@@ -58,7 +57,7 @@ class MenuPage extends StatelessWidget {
         leading: Icon(Icons.menu, color: Colors.grey[900]),
         title: Text(
           'Tokyo',
-          style: GoogleFonts.dmSerifDisplay(
+          style: TextStyle(
             color: Colors.grey[900],
             fontSize: 25,
           ),
@@ -84,7 +83,7 @@ class MenuPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Text(
                 'Food Menu',
-                style: GoogleFonts.dmSerifDisplay(
+                style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
                   color: Colors.grey[800],

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../theme/colors.dart';
 import 'button.dart';
@@ -34,7 +33,7 @@ class ActionableCard extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: GoogleFonts.dmSerifDisplay(
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 20,
                 ),

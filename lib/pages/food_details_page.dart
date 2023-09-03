@@ -1,43 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sushi/components/quantity_counter.dart';
 import 'package:sushi/models/food.dart';
 import 'package:sushi/models/shop.dart';
 import 'package:sushi/theme/colors.dart';
 import 'package:sushi/components/button.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:sushi/components/circular_icon_btn.dart';
 
-class FoodDetailsPage extends StatefulWidget {
+class FoodDetailsPage extends StatelessWidget {
   final Food foodItem;
+  int _itemQuantity = 0;
 
-  const FoodDetailsPage({
+  FoodDetailsPage({
     super.key,
     required this.foodItem,
   });
 
-  @override
-  State<FoodDetailsPage> createState() => _FoodDetailsPageState();
-}
-
-class _FoodDetailsPageState extends State<FoodDetailsPage> {
-  int _itemQuantity = 0;
-  final _maxQuantity = 10;
-
-  void _incrementQuantity() {
-    if (_itemQuantity >= _maxQuantity) return;
-    setState(() => ++_itemQuantity);
+  /// adds item to cart
+  void _addItemToCart(BuildContext context, String itemId, int quantity) {
+    context.read<Shop>().addToCart(itemId, quantity);
   }
 
-  void _decrementQuantity() {
-    if (_itemQuantity == 0) return;
-    setState(() => --_itemQuantity);
-  }
-
-  void _addToCart(String itemId) {
-    final shop = context.read<Shop>();
-    shop.addToCart(itemId, _itemQuantity);
-  }
-
+  /// show an alert
   void _showAddedToCartDialog(BuildContext context) {
     showDialog(
       barrierDismissible: false,
@@ -62,8 +45,8 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
             )
           ],
           content: Text(
-            '${widget.foodItem.name} added to cart',
-            style: GoogleFonts.dmSerifDisplay(
+            '${foodItem.name} added to cart',
+            style: const TextStyle(
               fontSize: 20,
             ),
           ),
@@ -90,9 +73,9 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                 ),
                 children: [
                   Hero(
-                    tag: widget.foodItem.tag,
+                    tag: foodItem.tag,
                     child: Image.asset(
-                      widget.foodItem.imagePath,
+                      foodItem.imagePath,
                       height: 250,
                     ),
                   ),
@@ -103,8 +86,8 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                         color: Colors.yellow[800],
                       ),
                       Text(
-                        widget.foodItem.rating,
-                        style: GoogleFonts.dmSerifDisplay(
+                        foodItem.rating,
+                        style: TextStyle(
                           color: Colors.grey[700],
                         ),
                       )
@@ -114,8 +97,8 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                     height: 10,
                   ),
                   Text(
-                    widget.foodItem.name,
-                    style: GoogleFonts.dmSerifDisplay(
+                    foodItem.name,
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 25,
                     ),
@@ -123,16 +106,16 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                   const SizedBox(
                     height: 20,
                   ),
-                  Text(
+                  const Text(
                     'Description',
-                    style: GoogleFonts.dmSerifDisplay(
+                    style: TextStyle(
                       fontSize: 20,
                     ),
                   ),
                   const SizedBox(height: 20),
                   Text(
                     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fringilla pretium elit et vehicula. Sed consequat mauris nunc, sit amet blandit dui vestibulum malesuada. Vivamus finibus ipsum quis nulla pulvinar sagittis. Aenean fermentum, sapien non posuere varius, augue tortor dictum libero, at dapibus nunc metus non nulla. Nullam egestas tellus vitae lacus venenatis tempor non in sapien. Donec sit amet condimentum ipsum. Cras sodales risus urna, id dignissim tortor ultricies a. Vestibulum porttitor tincidunt sapien, non facilisis erat tincidunt eget. In accumsan tellus a mattis tincidunt. Phasellus rutrum a diam eu ullamcorper. Etiam laoreet a dui quis sodales. Donec quis urna vehicula, tincidunt nulla et, suscipit lectus.Nulla tempor ante nec elit ultricies mattis. Ut faucibus consequat erat, sed consectetur mauris ultricies ac. Nullam a lectus varius, aliquam dui sit amet, ultrices ex. Vivamus eu feugiat ligula, laoreet consequat leo. Sed consectetur vulputate vulputate. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam nulla purus, commodo in diam nec, iaculis consequat orci. Duis justo turpis, pretium in arcu vel, sodales porta massa. Cras eget neque sed nisi volutpat mollis sit amet vitae ex. Fusce mollis ipsum at erat vulputate dictum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce in nisl lacus. Integer ultricies, neque quis placerat volutpat, felis lectus pharetra erat, quis ullamcorper mauris lectus sed orci. Fusce porta mauris vel dolor facilisis bibendum vitae at ipsum.',
-                    style: GoogleFonts.dmSerifDisplay(
+                    style: TextStyle(
                       color: Colors.grey[700],
                     ),
                   ),
@@ -156,35 +139,15 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '\$${widget.foodItem.price}',
-                          style: GoogleFonts.dmSerifDisplay(
+                          '\$${foodItem.price}',
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 20,
                           ),
                         ),
-                        Row(
-                          children: [
-                            CircularIconButton(
-                              icon: Icons.remove,
-                              onPressed: _decrementQuantity,
-                            ),
-                            SizedBox(
-                              width: 40,
-                              child: Center(
-                                child: Text(
-                                  '$_itemQuantity',
-                                  style: GoogleFonts.dmSerifDisplay(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            CircularIconButton(
-                              icon: Icons.add,
-                              onPressed: _incrementQuantity,
-                            ),
-                          ],
+                        QuantityCounter(
+                          onValueChanged: (int currentValue) =>
+                              _itemQuantity = currentValue,
                         )
                       ],
                     ),
@@ -193,8 +156,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                       text: 'Add To Cart',
                       onTap: () {
                         if (_itemQuantity == 0) return;
-
-                        _addToCart(widget.foodItem.id);
+                        _addItemToCart(context, foodItem.id, _itemQuantity);
                         _showAddedToCartDialog(context);
                       },
                       fontSize: 19,

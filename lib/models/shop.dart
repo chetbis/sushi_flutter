@@ -29,7 +29,10 @@ class Shop with ChangeNotifier {
 
   final String _popularFood = 'food_3';
 
-  List<String> _cartItems = [];
+  final Map<String, int> _cartItems = {
+    // key - item id,
+    // value - quantity
+  };
 
   List<Food> get foodItems {
     return _foodItemsEntities.entries.map((entry) => entry.value).toList();
@@ -42,13 +45,13 @@ class Shop with ChangeNotifier {
     return null;
   }
 
-  List<Food> get shopItems {
-    return _cartItems.fold(
+  List<Food> get cartItems {
+    return _cartItems.entries.fold(
       [],
-      (foodItems, foodItemKey) {
-        List<Food> newFoodItems = [...foodItems];
-        if (_foodItemsEntities.containsKey(foodItemKey)) {
-          newFoodItems.add(_foodItemsEntities[foodItemKey]!);
+      (previousFoodItems, entry) {
+        List<Food> newFoodItems = [...previousFoodItems];
+        if (_foodItemsEntities.containsKey(entry.key)) {
+          newFoodItems.add(_foodItemsEntities[entry.key]!);
         }
         return newFoodItems;
       },
@@ -62,15 +65,12 @@ class Shop with ChangeNotifier {
   /// add items to the shopping cart
   addToCart(String itemId, int quantity) {
     if (!_foodItemExists(itemId)) return;
-    for (int i = 0; i < quantity; i++) {
-      _cartItems.add(itemId);
-    }
+    _cartItems[itemId] = (_cartItems[itemId] ?? 0) + quantity;
     notifyListeners();
   }
 
   /// removes an item from the shopping cart
   removeFromCart(int itemIndex) {
-    _cartItems.removeAt(itemIndex);
-    notifyListeners();
+    /// TODO - implement this method
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class FoodTile extends StatelessWidget {
   final String imagePath;
@@ -41,7 +40,9 @@ class FoodTile extends StatelessWidget {
             ),
             Text(
               name,
-              style: GoogleFonts.dmSerifDisplay(fontSize: 20),
+              style: const TextStyle(
+                fontSize: 20,
+              ),
             ),
             SizedBox(
               width: 140,
@@ -50,7 +51,6 @@ class FoodTile extends StatelessWidget {
                 children: [
                   Text(
                     '\$$price',
-                    style: GoogleFonts.dmSerifDisplay(),
                   ),
                   Row(
                     children: [
@@ -60,7 +60,7 @@ class FoodTile extends StatelessWidget {
                       ),
                       Text(
                         rating,
-                        style: GoogleFonts.dmSerifDisplay(
+                        style: TextStyle(
                           color: Colors.grey[500],
                         ),
                       )

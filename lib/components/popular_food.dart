@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class PopularFood extends StatelessWidget {
   final String imagePath;
@@ -41,14 +40,16 @@ class PopularFood extends StatelessWidget {
               children: [
                 Text(
                   foodName,
-                  style: GoogleFonts.dmSerifDisplay(
+                  style: const TextStyle(
                     fontSize: 18,
                   ),
                 ),
                 const SizedBox(height: 5),
                 Text(
                   '\$$price',
-                  style: GoogleFonts.dmSerifDisplay(color: Colors.grey[700]),
+                  style: TextStyle(
+                    color: Colors.grey[700],
+                  ),
                 ),
               ],
             ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class FoodSearchInput extends StatelessWidget {
   const FoodSearchInput({super.key});
@@ -7,7 +6,7 @@ class FoodSearchInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      style: GoogleFonts.dmSerifDisplay(
+      style: const TextStyle(
         fontSize: 20,
       ),
       decoration: InputDecoration(

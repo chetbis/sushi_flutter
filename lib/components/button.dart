@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:sushi/theme/colors.dart';
 
 class MyButton extends StatelessWidget {
@@ -35,7 +34,7 @@ class MyButton extends StatelessWidget {
             children: [
               Text(
                 text,
-                style: GoogleFonts.dmSerifDisplay(
+                style: TextStyle(
                   color: Colors.white,
                   fontSize: fontSize,
                 ),

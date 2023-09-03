@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'food.dart';
 
 class Shop with ChangeNotifier {
-  final Map<String, Food> _foodItemsEntities = {
+  final Map<String, Food> _foodEntities = {
     'food_1': Food(
       id: 'food_1',
       name: 'Salmon Sushi',
@@ -35,12 +35,12 @@ class Shop with ChangeNotifier {
   };
 
   List<Food> get foodItems {
-    return _foodItemsEntities.entries.map((entry) => entry.value).toList();
+    return _foodEntities.entries.map((entry) => entry.value).toList();
   }
 
   Food? get popularFood {
     if (_foodItemExists(_popularFood)) {
-      return _foodItemsEntities[_popularFood];
+      return _foodEntities[_popularFood];
     }
     return null;
   }
@@ -50,8 +50,8 @@ class Shop with ChangeNotifier {
       [],
       (previousFoodItems, entry) {
         List<Food> newFoodItems = [...previousFoodItems];
-        if (_foodItemsEntities.containsKey(entry.key)) {
-          newFoodItems.add(_foodItemsEntities[entry.key]!);
+        if (_foodItemExists(entry.key)) {
+          newFoodItems.add(_foodEntities[entry.key]!);
         }
         return newFoodItems;
       },
@@ -59,7 +59,7 @@ class Shop with ChangeNotifier {
   }
 
   _foodItemExists(String itemId) {
-    return _foodItemsEntities.containsKey(itemId);
+    return _foodEntities.containsKey(itemId);
   }
 
   /// get added quantity
@@ -67,16 +67,8 @@ class Shop with ChangeNotifier {
     return _cartItems[itemId] ?? 0;
   }
 
-  /// add items to the shopping cart
-  addToCart(String itemId, int quantity) {
-    if (!_foodItemExists(itemId)) return;
-    _cartItems[itemId] = (_cartItems[itemId] ?? 0) + quantity;
-    notifyListeners();
-  }
-
   /// sets item quantity
   setItemQuantity(String itemId, int quantity) {
-    if (!_foodItemExists(itemId)) return;
     _cartItems[itemId] = quantity;
     notifyListeners();
   }
